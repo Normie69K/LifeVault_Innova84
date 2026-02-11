@@ -134,7 +134,11 @@ class GeolocationService {
       const userLat = submittedLocation?.latitude;
       const userLon = submittedLocation?.longitude;
 
+      console.log('\n📍 GPS Verification Started');
+      console.log('Submitted Location:', { lat: userLat, lon: userLon, accuracy: submittedLocation?.accuracy });
+
       if (typeof userLat !== 'number' || typeof userLon !== 'number') {
+        console.log('❌ GPS Verification Failed: Location data not provided');
         return {
           passed: false,
           withinRadius: false,
@@ -147,7 +151,10 @@ class GeolocationService {
       const coords = targetLocation?.coordinates;
       const allowedRadius = Math.max(10, Number(targetLocation?.radiusMeters || 50));
 
+      console.log('Target Location:', { coordinates: coords, allowedRadius });
+
       if (!Array.isArray(coords) || coords.length !== 2) {
+        console.log('❌ GPS Verification Failed: Quest target location not configured');
         return {
           passed: false,
           withinRadius: false,
@@ -161,7 +168,10 @@ class GeolocationService {
       const targetLon = Number(coords[0]);
       const targetLat = Number(coords[1]);
 
+      console.log('Parsed Target:', { lat: targetLat, lon: targetLon });
+
       if (!this.isValidCoordinates(userLat, userLon) || !this.isValidCoordinates(targetLat, targetLon)) {
+        console.log('❌ GPS Verification Failed: Invalid coordinates');
         return {
           passed: false,
           withinRadius: false,
@@ -174,6 +184,9 @@ class GeolocationService {
       const distanceMeters = Math.round(this.calculateDistance(userLat, userLon, targetLat, targetLon));
       const withinRadius = distanceMeters <= allowedRadius;
 
+      console.log(`📏 Distance Calculated: ${distanceMeters}m (allowed: ${allowedRadius}m)`);
+      console.log(`Result: ${withinRadius ? '✅ PASSED' : '❌ FAILED'}`);
+
       return {
         passed: withinRadius,
         withinRadius,
@@ -184,6 +197,7 @@ class GeolocationService {
           : `❌ Location mismatch (${distanceMeters}m away, allowed ${allowedRadius}m)`
       };
     } catch (e) {
+      console.error('❌ GPS Verification Error:', e);
       return {
         passed: false,
         withinRadius: false,

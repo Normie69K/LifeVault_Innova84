@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
     trim: true,
     maxlength: [50, 'Name cannot exceed 50 characters']
   },
-  
+
   // Aptos Wallet Info
   aptosAddress: {
     type: String,
@@ -39,7 +39,7 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
-  
+
   // Profile
   avatar: {
     type: String,
@@ -49,7 +49,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     maxlength: 500
   },
-  
+
   // Stats
   totalMemories: {
     type: Number,
@@ -61,7 +61,7 @@ const userSchema = new mongoose.Schema({
   },
 
   // ========== NEW: QUEST/GAMIFICATION FIELDS ==========
-  
+
   // Quest Statistics
   questStats: {
     totalCompleted: { type: Number, default: 0 },
@@ -128,6 +128,15 @@ const userSchema = new mongoose.Schema({
     category: { type: String }
   },
 
+  // Business Statistics (for quest creators)
+  businessStats: {
+    totalQuestsCreated: { type: Number, default: 0 },
+    totalAptAllocated: { type: Number, default: 0 },
+    totalAptRewarded: { type: Number, default: 0 },
+    totalQuestCompletions: { type: Number, default: 0 },
+    lastQuestCreatedAt: { type: Date }
+  },
+
   // Preferences
   preferences: {
     notifications: {
@@ -168,7 +177,7 @@ userSchema.index({ 'level.current': -1 });
 userSchema.index({ userType: 1 });
 
 // Hash password before saving (only if password exists)
-userSchema.pre('save', async function(next) {
+userSchema.pre('save', async function (next) {
   if (!this.isModified('password') || !this.password) {
     return next();
   }
@@ -178,16 +187,16 @@ userSchema.pre('save', async function(next) {
 });
 
 // Compare password (handle wallet-only users)
-userSchema.methods.comparePassword = async function(candidatePassword) {
+userSchema.methods.comparePassword = async function (candidatePassword) {
   if (!this.password) return false;
   return await bcrypt.compare(candidatePassword, this.password);
 };
 
 // Generate JWT token
-userSchema.methods.generateAuthToken = function() {
+userSchema.methods.generateAuthToken = function () {
   return jwt.sign(
-    { 
-      id: this._id, 
+    {
+      id: this._id,
       email: this.email,
       aptosAddress: this.aptosAddress,
       userType: this.userType
@@ -198,13 +207,13 @@ userSchema.methods.generateAuthToken = function() {
 };
 
 // Generate Aptos wallet address for user
-userSchema.methods.generateAptosWallet = async function() {
+userSchema.methods.generateAptosWallet = async function () {
   const { Account } = await import('@aptos-labs/ts-sdk');
   const crypto = await import('crypto');
-  
+
   const account = Account.generate();
   this.aptosAddress = account.accountAddress.toString();
-  
+
   const cipher = crypto.createCipheriv(
     'aes-256-cbc',
     Buffer.from(process.env.JWT_SECRET.padEnd(32).slice(0, 32)),
@@ -213,40 +222,40 @@ userSchema.methods.generateAptosWallet = async function() {
   let encrypted = cipher.update(account.privateKey.toString(), 'utf8', 'hex');
   encrypted += cipher.final('hex');
   this.encryptedPrivateKey = encrypted;
-  
+
   return this.aptosAddress;
 };
 
 // ========== NEW METHODS ==========
 
 // Add XP and check for level up
-userSchema.methods.addXP = async function(amount) {
+userSchema.methods.addXP = async function (amount) {
   this.level.xp += amount;
-  
+
   while (this.level.xp >= this.level.xpToNextLevel) {
     this.level.xp -= this.level.xpToNextLevel;
     this.level.current += 1;
     this.level.xpToNextLevel = Math.floor(this.level.xpToNextLevel * 1.5);
   }
-  
+
   return this.save();
 };
 
 // Add points
-userSchema.methods.addPoints = async function(amount) {
+userSchema.methods.addPoints = async function (amount) {
   this.points.current += amount;
   this.points.lifetime += amount;
   return this.save();
 };
 
 // Update quest streak
-userSchema.methods.updateStreak = async function() {
+userSchema.methods.updateStreak = async function () {
   const now = new Date();
   const lastCompleted = this.questStats.lastCompletedAt;
-  
+
   if (lastCompleted) {
     const hoursSinceLastQuest = (now - lastCompleted) / (1000 * 60 * 60);
-    
+
     if (hoursSinceLastQuest <= 24) {
       this.questStats.currentStreak += 1;
       if (this.questStats.currentStreak > this.questStats.longestStreak) {
@@ -258,13 +267,13 @@ userSchema.methods.updateStreak = async function() {
   } else {
     this.questStats.currentStreak = 1;
   }
-  
+
   this.questStats.lastCompletedAt = now;
   return this.save();
 };
 
 // Get public profile
-userSchema.methods.getPublicProfile = function() {
+userSchema.methods.getPublicProfile = function () {
   return {
     id: this._id,
     name: this.name,

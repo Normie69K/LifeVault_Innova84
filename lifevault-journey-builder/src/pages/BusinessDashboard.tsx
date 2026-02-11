@@ -55,6 +55,8 @@ const BusinessDashboard: React.FC = () => {
 
   const [quests, setQuests] = useState<CreatorQuest[]>([]);
   const [loadingQuests, setLoadingQuests] = useState(true);
+  const [businessStats, setBusinessStats] = useState<any>(null);
+  const [loadingStats, setLoadingStats] = useState(true);
 
   // Form state
   const [title, setTitle] = useState('');
@@ -81,6 +83,7 @@ const BusinessDashboard: React.FC = () => {
 
   useEffect(() => {
     fetchCreatorQuests();
+    fetchBusinessStats();
   }, []);
 
   const fetchCreatorQuests = async () => {
@@ -101,6 +104,26 @@ const BusinessDashboard: React.FC = () => {
       setQuests([]);
     }
     setLoadingQuests(false);
+  };
+
+  const fetchBusinessStats = async () => {
+    setLoadingStats(true);
+    try {
+      const token = localStorage.getItem('token');
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/business/stats`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setBusinessStats(data.data);
+      }
+    } catch (err) {
+      console.error('Failed to load business stats:', err);
+    }
+    setLoadingStats(false);
   };
 
   const useCurrentLocation = () => {
@@ -257,6 +280,11 @@ const BusinessDashboard: React.FC = () => {
     return acc + (completions * apt);
   }, 0);
 
+  // Use business stats from API if available, otherwise calculate from quests
+  const totalAptAllocated = businessStats?.totalAptAllocated || 0;
+  const totalAptRewarded = businessStats?.totalAptRewarded || totalRewardsGiven;
+  const aptRemaining = businessStats?.aptRemaining || (totalAptAllocated - totalAptRewarded);
+
   return (
     <BusinessLayout>
       <div className="min-h-screen space-y-6 pb-8">
@@ -323,9 +351,19 @@ const BusinessDashboard: React.FC = () => {
               <div className="p-2.5 bg-amber-100 rounded-xl">
                 <Trophy className="w-5 h-5 text-amber-600" />
               </div>
-              <span className="text-sm font-semibold text-gray-500">APT Rewarded</span>
+              <span className="text-sm font-semibold text-gray-500">APT Rewards</span>
             </div>
-            <p className="text-3xl font-black text-gray-900">{totalRewardsGiven.toFixed(1)}</p>
+            <p className="text-3xl font-black text-gray-900">{totalAptRewarded.toFixed(2)}</p>
+            <div className="mt-2 pt-2 border-t border-gray-100 space-y-1">
+              <div className="flex justify-between text-xs">
+                <span className="text-gray-500">Allocated:</span>
+                <span className="font-semibold text-gray-700">{totalAptAllocated.toFixed(2)} APT</span>
+              </div>
+              <div className="flex justify-between text-xs">
+                <span className="text-gray-500">Remaining:</span>
+                <span className="font-semibold text-green-600">{Math.max(0, aptRemaining).toFixed(2)} APT</span>
+              </div>
+            </div>
           </div>
         </div>
 
