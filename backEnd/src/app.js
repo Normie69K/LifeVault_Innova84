@@ -16,6 +16,7 @@ import questRoutes from './routes/questRoutes.js';
 import campaignRoutes from './routes/campaignRoutes.js';
 import badgeRoutes from './routes/badgeRoutes.js';
 import storyRoutes from './routes/storyRoutes.js';
+import businessRoutes from './routes/businessRoutes.js';
 
 const app = express();
 
@@ -122,6 +123,7 @@ app.use('/api/quests', questRoutes);
 app.use('/api/campaigns', campaignRoutes);
 app.use('/api/badges', badgeRoutes);
 app.use('/api/stories', storyRoutes);
+app.use('/api/business', businessRoutes);
 
 // ==========================================
 // API DOCUMENTATION (if needed)

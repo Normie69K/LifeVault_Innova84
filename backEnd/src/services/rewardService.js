@@ -3,7 +3,7 @@ import User from '../models/User.js';
 import Badge from '../models/Badge.js';
 
 class RewardService {
-  
+
   /**
    * Process rewards for a completed quest
    */
@@ -226,6 +226,28 @@ class RewardService {
     quest.stats.totalCompletions += 1;
     quest.stats.totalRewardsDistributed += aptReward || 0;
     await quest.save();
+
+    // Update business creator stats
+    try {
+      const creator = await User.findById(quest.creatorId);
+      if (creator && aptReward > 0) {
+        if (!creator.businessStats) {
+          creator.businessStats = {
+            totalQuestsCreated: 0,
+            totalAptAllocated: 0,
+            totalAptRewarded: 0,
+            totalQuestCompletions: 0
+          };
+        }
+        creator.businessStats.totalAptRewarded = (creator.businessStats.totalAptRewarded || 0) + aptReward;
+        creator.businessStats.totalQuestCompletions = (creator.businessStats.totalQuestCompletions || 0) + 1;
+        await creator.save();
+        console.log(`✅ Updated business stats for ${creator.name}: +${aptReward} APT rewarded`);
+      }
+    } catch (error) {
+      console.error('Error updating business creator stats:', error);
+      // Don't throw - this is a non-critical update
+    }
   }
 
   /**

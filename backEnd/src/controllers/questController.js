@@ -80,6 +80,30 @@ export const createQuest = async (req, res, next) => {
       coverImage
     });
 
+    // Update business creator stats
+    try {
+      const creator = await User.findById(req.user._id);
+      if (creator) {
+        if (!creator.businessStats) {
+          creator.businessStats = {
+            totalQuestsCreated: 0,
+            totalAptAllocated: 0,
+            totalAptRewarded: 0,
+            totalQuestCompletions: 0
+          };
+        }
+        creator.businessStats.totalQuestsCreated = (creator.businessStats.totalQuestsCreated || 0) + 1;
+        const aptAllocated = budget?.totalAptAllocated || rewards?.aptAmount || 0;
+        creator.businessStats.totalAptAllocated = (creator.businessStats.totalAptAllocated || 0) + aptAllocated;
+        creator.businessStats.lastQuestCreatedAt = new Date();
+        await creator.save();
+        console.log(`✅ Updated business stats for ${creator.name}: +1 quest, +${aptAllocated} APT allocated`);
+      }
+    } catch (error) {
+      console.error('Error updating business creator stats on creation:', error);
+      // Don't throw - this is a non-critical update
+    }
+
     res.status(201).json({
       success: true,
       message: 'Quest created successfully',
@@ -442,8 +466,21 @@ export const submitQuestCompletion = async (req, res, next) => {
 
     console.log('\n=== Processing Quest Submission ===');
     console.log('Quest:', quest.title);
+    console.log('Quest ID:', quest._id);
+    console.log('Quest Location:', {
+      coordinates: quest.location?.coordinates?.coordinates,
+      radius: quest.location?.radiusMeters,
+      name: quest.location?.name
+    });
     console.log('User:', req.user._id);
+    console.log('User Name:', req.user.name);
     console.log('Attempt:', attempt._id);
+    console.log('Submitted Data:', {
+      hasPhoto: !!photoBase64,
+      location: location,
+      qrCodeScanned: !!qrCodeScanned,
+      capturedAt
+    });
 
     // Run verification
     const submissionData = {
@@ -484,8 +521,24 @@ export const submitQuestCompletion = async (req, res, next) => {
         attempt
       );
 
+      // Transform reward results for database schema
+      const rewardsForDb = {
+        aptAmount: rewardResults.apt?.amount || 0,
+        points: rewardResults.points?.pointsAdded || 0,
+        badgeAwarded: rewardResults.badge?.badgeId || null,
+        nftMinted: false, // Will be updated if NFT is minted
+        nftTokenId: null,
+        nftTxHash: null
+      };
+
+      const blockchainData = rewardResults.apt?.success ? {
+        txHash: rewardResults.apt?.txHash,
+        txVersion: rewardResults.apt?.txVersion,
+        status: 'confirmed'
+      } : null;
+
       // Update attempt
-      await attempt.markAsCompleted(verification, rewardResults, rewardResults.apt);
+      await attempt.markAsCompleted(verification, rewardsForDb, blockchainData);
 
       // Send completion email (optional; skipped if SMTP not configured)
       try {
