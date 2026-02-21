@@ -1,0 +1,11 @@
+[package]
+name = "LifeVaultV2"
+version = "1.0.0"
+
+[addresses]
+LifeVault = "0xYOUR_GENERATED_WALLET_ADDRESS_HERE"
+
+[dependencies.AptosFramework]
+git = "https://github.com/aptos-labs/aptos-core.git"
+rev = "aptos-node-v1.8.0"
+subdir = "aptos-move/framework/aptos-framework"

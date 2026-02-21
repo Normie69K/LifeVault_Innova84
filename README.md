@@ -1,221 +1,164 @@
 # 🌐 LifeVault: The Complete Ecosystem Documentation
 
-**Version:** 2.0.0
-**Status:** Beta (Testnet Live)
-**Core Stack:** Aptos Blockchain, IPFS, Node.js, React, Android (Kotlin)
+[![Aptos Network](https://img.shields.io/badge/Aptos-Mainnet%20Ready-success?style=for-the-badge&logo=aptos)](https://explorer.aptoslabs.com/)
+[![React](https://img.shields.io/badge/React-18-blue?style=for-the-badge&logo=react)](https://react.dev/)
+[![Node.js](https://img.shields.io/badge/Node.js-Backend-green?style=for-the-badge&logo=node.js)](https://nodejs.org/)
+[![Android](https://img.shields.io/badge/Android-dApp-3DDC84?style=for-the-badge&logo=android)](https://developer.android.com/)
+[![Gemini AI](https://img.shields.io/badge/Gemini-AI_Vision-orange?style=for-the-badge&logo=google)](https://ai.google.dev/)
+
+**Version:** 2.0.0 | **Status:** Beta (Testnet Live)
+
+LifeVault is a **Decentralized Memory Preservation & Gamification Protocol**. It bridges digital permanence, cryptographic asset ownership, and real-world physical engagement using a customized hybrid Web3 architecture.
+
+---
+
+## 🔗 Live Links & Deployments
+
+* 🏛️ **Smart Contract (Aptos Explorer):** [View LifeVaultV2 Module on Devnet](https://explorer.aptoslabs.com/account/0x599c19cd1f5a85d4eb4f403337bee2c26a8259b43c6cd0c9b6cdfd63d3874cc6/modules?network=devnet)
+* 🌐 **Journey Builder (Frontend):** *https://life-vault-frontend-evuq.vercel.app/*
+* ⚙️ **API Gateway (Backend):** *https://life-vault-backend.vercel.app/*
+* 📱 **Android dApp:** Available in :[releases](https://github.com/Normie69K/LifeVault-dapp/releases/tag/v1.0)
 
 ---
 
 ## 📑 Table of Contents
 
-1. **Executive Summary & Vision** ("The Why")
-2. **Business Strategy & MVP** ("The What")
-3. **Technical Architecture** ("The How")
-4. **Component Deep Dive**
-5. **Detailed Folder Structure**
-6. **Key Technical Workflows**
-7. **Future Roadmap**
+1. [Executive Summary & Vision](#1-executive-summary--vision)
+2. [Business Strategy & MVP](#2-business-strategy--mvp)
+3. [Technical Architecture & Language Mapping](#3-technical-architecture--language-mapping)
+4. [Component Deep Dive](#4-component-deep-dive)
+5. [Detailed Folder Structure](#5-detailed-folder-structure)
+6. [Key Technical Workflows](#6-key-technical-workflows)
+7. [Future Roadmap](#7-future-roadmap)
+8. [LICENSE](#8-LICENSE)
 
 ---
 
 ## 1. Executive Summary & Vision
 
-**LifeVault** is a **Decentralized Memory Preservation & Gamification Protocol**. It bridges the gap between digital permanence and real-world engagement.
+**The Vision:** To build an unalterable, gamified ledger for human experiences.
 
-### The Problems Solved
-
-* **Digital Fragility:** In Web2, if you stop paying your cloud subscription or get banned, your memories are deleted. LifeVault uses **IPFS** (InterPlanetary File System) for decentralized storage and **Aptos** for immutable ownership, ensuring memories survive independently of any single entity.
-* **Passive Engagement:** Traditional storage apps are static archives. LifeVault introduces **"Proof of Experience"**, a gamified layer where users must physically visit locations and capture moments to unlock rewards, transforming memory capture into an RPG.
-* **Crypto Complexity:** LifeVault abstracts away blockchain friction (wallets, gas fees) using a backend "Relayer," making Web3 invisible to the end-user.
+### 🛑 The Problems Solved (Concise)
+1.  **Digital Fragility:** Web2 clouds delete inactive data. **Solution:** IPFS pinning for media permanence + Aptos blockchain for mathematically proven asset ownership.
+2.  **Passive Archiving:** Storage apps are boring. **Solution:** "Proof of Experience" logic requiring users to travel physically to locations to unlock NFT rewards.
+3.  **Web3 Friction:** Mass adoption is killed by gas fees. **Solution:** A backend "Gas Relayer" that pays transaction fees on behalf of the Web2 user.
 
 ---
 
 ## 2. Business Strategy & MVP
 
-The platform operates as a **B2B2C (Business-to-Business-to-Consumer)** marketplace connecting Explorers (Users) with Experience Creators (Brands).
+LifeVault is a **B2B2C marketplace** matching Everyday Explorers with Experience Creators (Brands).
 
-### 2.1 The Minimum Viable Product (MVP)
+### 🎯 The Minimum Viable Product (MVP)
+* **For Users ("Explorers"):** An Android app and Web Portal to upload decentralized memories, bundle them into timelines, and complete location-based Quests.
+* **For Brands ("Creators"):** A SaaS dashboard to fund location-based campaigns (e.g., "Visit our new cafe") and distribute automated rewards via smart contracts.
+* **The AI Judge:** Google Gemini Vision acts as the untamperable referee, proving users actually visited locations without spoofing (e.g., taking photos of computer screens).
 
-The current codebase implements two distinct sides of the platform:
-
-**A. For Users ("The Explorer")**
-
-* **Immutable Vault:** Upload photos/videos that are encrypted and pinned to IPFS forever.
-* **Quest Map:** View and participate in location-based challenges (e.g., "Visit the Eiffel Tower").
-* **AI Verification:** Get instant feedback on quest submissions via Google Gemini AI, which checks for location accuracy and anti-spoofing (no screen photos).
-
-**B. For Business ("The Creator")**
-
-* **Campaign Dashboard:** Brands create "Quests" to drive foot traffic to physical locations.
-* **Reward Pools:** Brands fund campaigns with APT, which is automatically distributed to users upon successful quest completion.
-
-### 2.2 Revenue Model
-
-1. **Quest-as-a-Service (Primary):** Brands pay a SaaS fee + a per-verification fee to host campaigns that drive verifiable physical visits.
-2. **Freemium Storage:** Users get 5GB free; Premium users pay for unlimited decentralized pinning and inheritance features.
-3. **Institutional Archival:** Governments/Universities issuing soulbound credentials (diplomas, deeds) on LifeVault.
+### 💰 Revenue Model
+1.  **B2B Quest-as-a-Service:** Brands pay a SaaS deployment fee + micro-transactions for verified foot traffic.
+2.  **B2C Freemium Storage:** Users get 5GB free; Premium unlocks unlimited IPFS pinning and smart contract "Inheritance" features.
 
 ---
 
-## 3. Technical Architecture
+## 3. Technical Architecture & Language Mapping
 
-The system utilizes a **Hybrid Web3 Architecture**. It combines the speed of a centralized API for metadata/search with the trustlessness of blockchain for ownership.
+The system combines the fast read speeds of a NoSQL Web2 database with the trustless, zero-downtime execution of the Web3 Aptos blockchain.
+
+### 💻 Language & Tech Stack Mapping
+* **Smart Contracts:** `Aptos Move` (Rust-inspired, strictly-typed language preventing double-spend exploits).
+* **Backend Orchestrator:** `JavaScript / Node.js (Express)` (Handles high-speed API requests, IPFS syncing, and AI processing).
+* **Frontend Web:** `TypeScript / React (Vite)` (Ensures type-safe component rendering for the complex business dashboard).
+* **Native Mobile:** `Kotlin / Jetpack Compose` (Direct access to hardware-level Android Keystore for secure signing without external wallets).
 
 ```mermaid
 graph TD
-    User[User Device] -->|1. Upload| Backend[Node.js API]
-    Backend -->|2. Pin| IPFS[Pinata IPFS]
-    Backend -->|3. Verify| AI[Google Gemini]
-    Backend -->|4. Relay Tx| Blockchain[Aptos Network]
-    Blockchain -->|5. Confirm| Database[(MongoDB)]
+    subgraph Client Edge
+        Android[Android dApp<br/>Kotlin]
+        Web[React Web UI<br/>TypeScript]
+    end
+
+    subgraph The Orchestrator
+        Backend[Express API Relayer<br/>Node.js]
+        DB[(MongoDB)]
+    end
+
+    subgraph Decentralized Infrastructure
+        IPFS[Pinata Storage<br/>IPFS]
+        Aptos[Aptos Blockchain<br/>Move]
+    end
+    
+    subgraph Intelligence
+        Gemini[Google Gemini Vision<br/>AI]
+    end
+
+    Android & Web -->|1. Sign Payload & Upload| Backend
+    Backend <-->|2. Cache Meta| DB
+    Backend -->|3. Pin Media| IPFS
+    Backend -->|4. Anti-Spoof Eval| Gemini
+    Backend -->|5. Sponsor Mint Gas| Aptos
 
 ```
-
-### Core Tech Stack
-
-* **Blockchain:** Aptos (Move Language) for asset ownership and transfer logic.
-* **Backend:** Node.js (Express) acting as an orchestrator and gas station.
-* **Storage:** Pinata (IPFS) for media; MongoDB for metadata and user profiles.
-* **AI:** Google Gemini 1.5 Flash for computer vision and anti-spoofing.
-* **Frontend:** React (Vite) + Tailwind for the web dashboard.
-* **Mobile:** Native Android (Kotlin) for the physical capture interface.
 
 ---
 
 ## 4. Component Deep Dive
 
-### 🏛️ A. The Blockchain Layer (Aptos Move)
+### 🏛️ 1. The Blockchain Layer (`/lifeVault-smartContracts`)
 
-**File:** `backEnd/move/sources/MemoryVault.move`
-The smart contract acts as the "Source of Truth" for ownership.
+Written in **Aptos Move**, this is the ultimate Source of Truth.
 
-* **`struct Memory`**: The core asset containing `ipfs_hash`, `owner`, and `timestamp`.
-* **`store_memory`**: The primary entry point. It mints the memory to the user's account.
-* **`transfer_memory`**: Enables the **Inheritance Protocol**, allowing assets to be moved to a beneficiary wallet.
-* **`UserMemories`**: An on-chain index tracking which IDs belong to which address.
+* **Core Logic:** The `lifevault.move` module defines the `Memory` asset. Because Move uses "resources", these memories cannot be implicitly discarded or duplicated.
+* **Key Functions:** `mint_memory` (creates the asset) and `transfer_memory` (allows inheritance/gifting).
 
-### 🧠 B. The Intelligence Layer (Node.js)
+### ⚙️ 2. The Intelligence & Relay API (`/lifeVault-backEnd`)
 
-**File:** `backEnd/src/services/`
+Written in **Node.js/Express**, it eliminates friction.
 
-* **Gas Relayer (`aptosService.js`)**: Implements `submitSponsoredMemory`. It verifies a user's off-chain signature and submits the transaction via the backend's master wallet, paying the gas fee on behalf of the user.
-* **AI Vision Guard (`aiVisionService.js`)**: Sends images to Gemini with a strict system prompt: *"Anti-Spoofing Checks: Detect if this is a photo of a screen... respond with JSON."*.
+* **Gas Relayer:** Validates off-chain user signatures, wraps them in a transaction payload, and submits them using the Master Backend Wallet, absorbing the Aptos gas fee.
+* **AI Vision Guard:** Streams real-time physical images to Google Gemini to prevent fraud (detecting monitors, printed paper, or deepfakes).
 
-### 💻 C. The Web Platform (Journey Builder)
+### 🌐 3. The Journey Builder (`/lifeVault-frontEnd`)
 
-**File:** `lifevault-journey-builder/src/`
+Written in **React (TypeScript) & Vite**, tailored for desktop management.
 
-* **Story Engine**: Users can bundle individual memories into "Chapters" or "Time Capsules" (`CreateStoryModal.tsx`).
-* **Business Portal**: A dedicated interface for brands to track campaign analytics and user engagement (`BusinessDashboard.tsx`).
+* **Story Engine:** Lets users bundle isolated IPFS hashes into chronological "Chapters".
+* **Creator Portal:** Provides brands with analytics and UI controls to fund smart-contract reward pools.
 
-### 📱 D. The Mobile Frontier (Android)
+### 📱 4. The Physical Edge (`/lifeVault-dApp`)
 
-**File:** `LifeVault-dapp/app/src/`
+Written in **Kotlin (Android)**, utilizing hardware.
 
-* **Manual TX Building**: The app manually constructs BCS (Binary Canonical Serialization) payloads and signs them using a local Ed25519 `CryptoManager`, bypassing the need for external wallet apps.
-* **Hardware Integration**: Uses CameraX and ML Kit for QR scanning and wallet pairing.
+* **Non-Custodial Cryptography:** Uses Android's native Keystore to generate Ed25519 keypairs. The private key never touches the internet.
+* **Sensors:** Binds CameraX and Geolocation directly into the Web3 uploading flow.
 
 ---
 
 ## 5. Detailed Folder Structure
 
-### 📂 Root: `backEnd` (API & Smart Contracts)
-
-The central nervous system handling logic, AI, and blockchain syncing.
-
 ```text
-backEnd/
-├── move/                               # APTOS SMART CONTRACTS
-│   ├── Move.toml                       # Package config & addresses
-│   └── sources/
-│       └── MemoryVault.move            # CORE LOGIC: Memory structs & ownership
-├── src/                                # NODE.JS SOURCE
-│   ├── config/
-│   │   ├── constants.js                # Game rules (XP values, Quest Types)
-│   │   └── database.js                 # MongoDB connection
-│   ├── controllers/                    # BUSINESS LOGIC
-│   │   ├── authController.js           # JWT & Wallet auth
-│   │   ├── questController.js          # GPS & AI verification flow
-│   │   ├── memoryController.js         # IPFS pinning & DB sync
-│   │   └── campaignController.js       # Brand campaign management
-│   ├── middleware/
-│   │   ├── authMiddleware.js           # JWT protection
-│   │   └── utilityMiddleware.js        # Logging & Rate limiting
-│   ├── models/                         # MONGODB SCHEMAS
-│   │   ├── User.js                     # Profile, RPG Stats, Wallet Info
-│   │   ├── Memory.js                   # IPFS Hash <-> Metadata link
-│   │   ├── Quest.js                    # Location targets & AI prompts
-│   │   └── Story.js                    # Collections of memories
-│   ├── routes/                         # API ENDPOINTS
-│   │   ├── authRoutes.js               # /api/auth
-│   │   ├── questRoutes.js              # /api/quests
-│   │   └── memoryRoutes.js             # /api/memories
-│   ├── services/                       # EXTERNAL SERVICES
-│   │   ├── aiVisionService.js          # GEMINI: Anti-spoofing logic
-│   │   ├── aptosService.js             # BLOCKCHAIN: Gas Relayer
-│   │   ├── ipfsService.js              # PINATA: File storage
-│   │   └── geolocationService.js       # GPS distance calc
-│   └── app.js                          # Express App setup
-└── package.json                        # Dependencies (@aptos-labs/ts-sdk)
-
-```
-
-### 📂 Root: `lifevault-journey-builder` (Web Dashboard)
-
-The user-facing "Command Center" for managing digital legacies.
-
-```text
-lifevault-journey-builder/
-├── src/
-│   ├── components/
-│   │   ├── dashboard/                  # APP UI
-│   │   │   ├── Timeline.tsx            # Memory feed
-│   │   │   ├── StatsCards.tsx          # Storage/XP display
-│   │   │   └── AddMemoryModal.tsx      # Upload interface
-│   │   ├── story/                      # STORY MODE
-│   │   │   └── CreateStoryModal.tsx    # Memory bundling UI
-│   │   ├── wallet/                     # WEB3 CONNECT
-│   │   │   └── WalletSelector.tsx      # Petra/Martian adapter
-│   ├── context/
-│   │   ├── AuthContext.tsx             # User session state
-│   │   └── WalletContext.tsx           # Aptos connection state
-│   ├── hooks/
-│   │   └── useMemories.ts              # Data fetching hook
-│   ├── pages/                          # ROUTING
-│   │   ├── Dashboard.tsx               # Main user landing
-│   │   ├── Campaigns.tsx               # Quest Map & Discovery
-│   │   ├── BusinessDashboard.tsx       # Brand Portal
-│   │   └── QuestMap.tsx                # Leaflet map integration
-│   ├── services/                       # API CLIENTS
-│   │   ├── api.ts                      # Axios instance
-│   │   └── questApi.ts                 # Quest endpoints
-│   └── App.tsx                         # Router config
-
-```
-
-### 📂 Root: `LifeVault-dapp` (Android Mobile)
-
-The native app for physical world interaction and capture.
-
-```text
-LifeVault-dapp/app/src/main/
-├── AndroidManifest.xml                 # Permissions (Camera, Internet)
-├── java/com/codebyte/lifevault_dapp/
-│   ├── core/                           # LOW-LEVEL LOGIC
-│   │   ├── AptosClient.kt              # Manual RPC Client & TX Builder
-│   │   ├── CryptoManager.kt            # Ed25519 Key Gen
-│   │   └── IPFSClient.kt               # Mobile Uploads
-│   ├── data/                           # DATA LAYER
-│   │   ├── MemoryRepository.kt         # Local caching
-│   │   └── BackendApiService.kt        # Retrofit API
-│   ├── ui/                             # JETPACK COMPOSE
-│   │   ├── components/
-│   │   │   ├── QRScanner.kt            # CameraX Scanner
-│   │   │   └── WalletBalanceCard.kt    # UI Component
-│   │   ├── screens/
-│   │   │   ├── HomeScreen.kt           # Main Dashboard
-│   │   │   └── UnlockScreen.kt         # Biometric Auth
-│   └── MainViewModel.kt                # UI State Holder
+LifeVault_Innova8/
+│
+├── lifeVault-smartContracts/               # 🏛️ THE BLOCKCHAIN LAYER (Move)
+│   ├── Move.toml                           # Package manifest & network addresses
+│   └── sources/lifevault.move              # Core asset ownership rules
+│
+├── lifeVault-backEnd/                      # ⚙️ THE ORCHESTRATOR (Node.js)
+│   ├── src/models/                         # MongoDB schemas (User, Quest, Memory)
+│   ├── src/controllers/                    # REST API route logic
+│   └── src/services/                       # Integrations
+│       ├── aiVisionService.js              # Gemini Anti-Spoofing
+│       ├── aptosService.js                 # Gas Relayer & SDK
+│       └── ipfsService.js                  # Pinata IPFS pinning
+│
+├── lifeVault-frontEnd/                     # 🌐 THE WEB PLATFORM (React/TS)
+│   ├── src/pages/                          # Routing (Dashboard, QuestMap, Login)
+│   ├── src/components/                     # Reusable shadcn/ui components
+│   └── src/context/                        # Auth & Aptos Wallet connection state
+│
+└── lifeVault-dApp/                         # 📱 THE NATIVE EDGE (Kotlin)
+    ├── app/src/main/java/core/             # Web3 RPC wrappers & CryptoManager
+    ├── app/src/main/java/data/             # Local database & API Retrofit config
+    └── app/src/main/java/ui/               # Jetpack Compose UI screens
 
 ```
 
@@ -223,30 +166,41 @@ LifeVault-dapp/app/src/main/
 
 ## 6. Key Technical Workflows
 
-### 6.1 The "Gasless" Memory Creation
+### 6.1 The "Gasless" Minting Workflow
 
-This workflow allows users to mint NFTs without holding APT cryptocurrency.
+How Web2 users mint NFTs without buying crypto:
 
-1. **Upload:** User uploads a file via the frontend. `ipfsService.js` pins it to Pinata and returns an IPFS Hash.
-2. **Sign:** The user's wallet *signs* the IPFS Hash string (off-chain operation).
-3. **Relay:** The backend receives `{ ipfsHash, signature, publicKey }`.
-4. **Verify & Mint:** `aptosService.js` verifies the signature. If valid, the **Master Account** builds and submits a `store_memory` transaction to Aptos, paying the gas fees.
-5. **Result:** The user owns the on-chain asset, but the platform paid the cost.
+1. **Upload:** User uploads a photo via the app. Backend `ipfsService.js` pins it and returns an `ipfs://` hash.
+2. **Sign Offline:** The user's device (`CryptoManager.kt`) signs the hash string.
+3. **Relay:** Backend receives the signature. `aptosService.js` validates it.
+4. **Mint & Sponsor:** The Backend's Master Wallet constructs the `mint_memory` payload, pays the gas, and routes ownership to the user's address.
 
-### 6.2 The AI Quest Verification Loop
+### 6.2 The AI "Proof-of-Experience" Loop
 
-1. **Capture:** Mobile app captures a photo at specific GPS coordinates.
-2. **Geo-Check:** Backend validates the user is within 50m of the target using `geolocationService.js`.
-3. **AI-Check:** `aiVisionService.js` sends the image to Google Gemini.
-* *Prompt:* "Verify if this is [Target Location]. Check for screen spoofing."
+How Quests prevent cheating:
 
-
-4. **Reward:** If `passed: true`, the backend updates `User.questStats` and optionally triggers an on-chain reward transfer.
+1. **Capture:** User takes a photo inside a geofenced area.
+2. **Geo-Validation:** Backend validates GPS coordinates are within 50m of the target.
+3. **Vision Evaluation:** `aiVisionService.js` prompts Gemini: *"Verify this image is physically at [Landmark]. Return false if a digital screen or printed photo is detected."*
+4. **Reward:** If true, the smart contract automatically drops $APT or NFT Badges into the user's wallet.
 
 ---
 
 ## 7. Future Roadmap
 
-* **Phase 1 (Legacy Protocol):** Implementation of a "Dead Man's Switch" that auto-transfers the `MemoryVault` to a beneficiary if the user is inactive for a set period (supported by `transfer_memory` in Move contract).
-* **Phase 2 (Hardware "Twin-Lock"):** Integration of NFC tags at physical locations, requiring users to "tap" their phone *and* take a photo for 2-factor location verification.
-* **Phase 3 (Decentralized AI):** Migrating computer vision tasks from Google Gemini to a decentralized compute network (like Render or Akash) to remove the centralized AI dependency.
+* **Phase 1: The Inheritance Protocol (Dead Man's Switch)**
+Expanding the Move contract. If a wallet has zero transactions for 5 years, an oracle auto-transfers the `MemoryVault` to a predefined cryptographic beneficiary.
+* **Phase 2: Hardware "Twin-Lock" Verification**
+Deploying NFC tags at physical landmarks. Users must cryptographically "tap" their Android device *and* pass the Gemini visual check for 2-Factor Physical Authentication.
+* **Phase 3: Decentralized AI Migration**
+Replacing Google Gemini with decentralized compute networks (like Akash or Render) to execute open-source visual Anti-Spoofing models, fully decentralizing the intelligence layer.
+
+---
+
+## 8. License
+
+This project is licensed under the **MIT License**. 
+
+You are free to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the software, provided that the original copyright notice and this permission notice are included in all copies or substantial portions of the software. 
+
+See the [LICENSE](LICENSE)
